@@ -1,0 +1,22 @@
+{
+  "name": "notification-service",
+  "version": "1.0.0",
+  "description": "SNS-triggered notification handler",
+  "main": "handler.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --passWithNoTests",
+    "deploy": "serverless deploy --stage dev --region ap-south-1"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.0",
+    "@types/jest": "^29.0.0",
+    "@types/node": "^18.0.0",
+    "typescript": "^5.0.0",
+    "ts-jest": "^29.0.0",
+    "jest": "^29.0.0",
+    "serverless": "^3.0.0",
+    "serverless-esbuild": "^1.0.0"
+  }
+}
