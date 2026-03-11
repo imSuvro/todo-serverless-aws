@@ -1,5 +1,5 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
-import { ScanCommand } from '@aws-sdk/lib-dynamodb';
+import { ScanCommand, ScanCommandInput } from '@aws-sdk/lib-dynamodb';
 import { ddb, TABLE_NAME } from '../utils/dynamodb';
 import { log } from '../utils/logger';
 import { success, error } from '../utils/response';
@@ -13,13 +13,16 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
 
     const limit = limitParam ? parseInt(limitParam, 10) : 50;
 
-    const params: Parameters<typeof ddb.send>[0] extends { input: infer I } ? never : any = {
+    const params: ScanCommandInput = {
       TableName: TABLE_NAME,
       Limit: limit,
-      ...(nextKeyParam && {
-        ExclusiveStartKey: JSON.parse(Buffer.from(nextKeyParam, 'base64').toString('utf8')),
-      }),
     };
+
+    if (nextKeyParam) {
+      params.ExclusiveStartKey = JSON.parse(
+        Buffer.from(nextKeyParam, 'base64').toString('utf8')
+      );
+    }
 
     const result = await ddb.send(new ScanCommand(params));
 
