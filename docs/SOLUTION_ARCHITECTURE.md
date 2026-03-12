@@ -232,7 +232,7 @@ Complete synchronous and asynchronous chain triggered by a `POST /todos` request
 sequenceDiagram
     participant Client
     participant APIGW as API Gateway
-    participant Create as createTodo Lambda
+    participant CreateFn as createTodo Lambda
     participant DDB as DynamoDB
     participant SQS as SQS — TodoTaskQueue
     participant SNS as SNS — TodoEventsTopic
@@ -241,12 +241,12 @@ sequenceDiagram
     participant CW as CloudWatch Logs
 
     Client->>APIGW: POST /todos {title, description}
-    APIGW->>Create: Invoke handler
-    Create->>DDB: PutItem (status: PENDING)
-    DDB-->>Create: Item saved
-    Create->>SQS: SendMessage (task payload)
-    Create->>SNS: Publish TODO_CREATED event
-    Create-->>APIGW: 201 Created
+    APIGW->>CreateFn: Invoke handler
+    CreateFn->>DDB: PutItem (status: PENDING)
+    DDB-->>CreateFn: Item saved
+    CreateFn->>SQS: SendMessage (task payload)
+    CreateFn->>SNS: Publish TODO_CREATED event
+    CreateFn-->>APIGW: 201 Created
     APIGW-->>Client: Todo item response
 
     Note over SQS,Task: Async — Task Processing

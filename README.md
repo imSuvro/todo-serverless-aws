@@ -1,8 +1,8 @@
-[Node.js](https://nodejs.org/)
-[TypeScript](https://www.typescriptlang.org/)
-[Serverless Framework](https://www.serverless.com/framework/docs)
-[AWS Lambda](https://aws.amazon.com/lambda/)
-[License: MIT](./LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-18.x-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Serverless](https://img.shields.io/badge/Serverless-v3-FD5750?logo=serverless&logoColor=white)](https://www.serverless.com/)
+[![AWS Lambda](https://img.shields.io/badge/AWS-Lambda-FF9900?logo=amazon-aws&logoColor=white)](https://aws.amazon.com/lambda/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/imSuvro/todo-serverless-aws/blob/main/LICENSE)
 
 This repository contains an event-driven Todo Management backend built as three independent serverless microservices. It is fully deployed on AWS (`ap-south-1`) and exposes a live API, with asynchronous workflows coordinated through SQS and SNS.
 
@@ -34,7 +34,7 @@ Client → API Gateway → Todo Service (Lambda) → DynamoDB
 | Notification Service    | SNS topic subscription | Consumes domain events (`TODO_CREATED`, `TODO_COMPLETED`) and logs notification actions |
 
 
-For the full architecture document — data model, event flows, IAM scoping, DLQ strategy, and design trade-offs — see the [Solution Architecture](https://docs.google.com/document/d/1cKda4C2b3Wlg9RIyeTtF3fC2teeFMiK_wj80tZTmx1o/edit?usp=sharing).
+For the full architecture document — data model, event flows, IAM scoping, DLQ strategy, and design trade-offs — see the [Solution Architecture](./docs/SOLUTION_ARCHITECTURE.md).
 
 ## Project Structure
 
