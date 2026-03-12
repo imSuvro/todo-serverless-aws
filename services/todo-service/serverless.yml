@@ -10,7 +10,6 @@ provider:
   memorySize: 128
   timeout: 10
   environment:
-    AWS_REGION: ${self:provider.region}
     TODOS_TABLE: todos-${self:provider.stage}
     TODO_TASK_QUEUE_URL: !Ref TodoTaskQueue
     TODO_EVENTS_TOPIC_ARN: !Ref TodoEventsTopic
