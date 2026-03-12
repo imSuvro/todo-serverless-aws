@@ -1,0 +1,244 @@
+{
+  "info": {
+    "_postman_id": "2a56eb74-ffe2-45e5-ba93-bccbb3c9acfd",
+    "name": "Todo Management System - Live API",
+    "description": "Live API verification for AWS serverless todo assessment deployed in ap-south-1, developed for dot&key recruitment process.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "36795402"
+  },
+  "item": [
+    {
+      "name": "Create Todo",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const response = pm.response.json();\r",
+              "if (response.todoId) {\r",
+              "  pm.environment.set(\"TODO_ID\", response.todoId);\r",
+              "}\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Test todo 2\",\r\n  \"description\": \"Test todo 2 description is right hereeeee....\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/todos",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "todos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "List Todos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/todos",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "todos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Todo By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/todos/{{TODO_ID}}",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "todos",
+            "{{TODO_ID}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Todo Title",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Test Todo 1 name updated\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/todos/{{TODO_ID}}",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "todos",
+            "{{TODO_ID}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Mark Todo Completed",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"status\": \"COMPLETED\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/todos/{{TODO_ID}}",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "todos",
+            "{{TODO_ID}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Todo",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/todos/{{TODO_ID}}",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "todos",
+            "{{TODO_ID}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Todo - Missing Title",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"description\": \"This should fail with 400, because no title.\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/todos",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "todos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Invalid Transition - Completed To Pending",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"status\": \"PENDING\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/todos/{{COMPLETED_TODO_ID}}",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "todos",
+            "{{COMPLETED_TODO_ID}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
